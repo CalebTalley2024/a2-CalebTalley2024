@@ -3,7 +3,7 @@
   <head>
     <title>CS4241 Assignment 2</title>
     <meta charset="utf-8">
-    <link rel="stylesheet"  href = "/public/css/style.css">
+    <link rel="stylesheet"  href = "/css/style.css">
     
   </head>
   <body>
@@ -15,8 +15,7 @@
 
     <div>
       <label for="newTask">New Task:</label>
-      <input type='text' id='newTask' placeholder="sample task"> 
-
+      <input type='text' id='newTask' placeholder="sample task">  
       <div id = "dropDowns"> 
         <select id="ToDoType" >
           <option value="School">School </option>
@@ -43,69 +42,42 @@
           <option value="2025">2025 </option>
         </select>
     </div>
-
       <br>
       <button id = "submitButton">submit</button>
-      <button id="taskNewButton">+</button>
-      
- 
+      <button id="taskNewButton">plus</button>
       <div class="toDoList" id="toDoList">
        <h2> <u>Tasks to Complete</u></h2>
       <br>
     </div> 
-   
-    </div>
-  
-    </form>  
+
+    <p id = "test">
+      <!-- test for plus -->
+
+    </p>
+    <hr>
+
+    <p id = "testServerI">
+      <!-- test for server -->
+    </p>
     
-  
-    <script src="/public/js/scripts.js"></script>
+    </div>
+    </form>  
+    <br>
+    <table id = TaskTable>
+      <!-- header for the table -->
+      <tr>
+        <th> Task </th>
+        <th> ToDoType </th>
+        <th> Difficulty </th>
+        <th> Year </th>
+        <th> DerivedSemester </th>
+      </tr>
+
+    </table>
+
+
+    <script src="/js/scripts.js"></script>
     </body>
+    
 
-  <script>
-
-  const submit = function( e ) {
-    // prevent default from trying to go to another page
-    e.preventDefault()
-
-// references first with attribute inside parenthesis ( ~ to getElementById but more general )
-    const input = document.querySelector( '#newTask' ) 
-    const field1 = document.querySelector( '#ToDoType')
-    const field2 = document.querySelector('#Difficulty')
-    const field3= document.querySelector("#Semester")
-    const Year = document.querySelector("#Year"),
-    // creating json object from our input     
-          json  = { Task: input.value, ToDoType: field1.value, Difficulty: field2.value, Year: field3.value},
-            //json is used since it makes data easy to manipulate
-// stringify will convert this object into a string
-          body = JSON.stringify( json )
-          
-    // fetch will do an ansynchronous network request ( ones used in server) - returns a promise?
-    fetch( '/submit', { // fetch is where you specify the url><
-      method:'POST',
-      body
-    })
-    // javascript promise: value that is unknown now, it is called when it is received by the server?
-    .then( 
-      function(  response ) {
-      // do something with the reponse 
-      //  console.log( response.json() )
-        return response.json()
-      }
-    )
-    .then( function(res){
-      // do something with res 
-      console.log(res)
-    })
-
-    return false
-  }
- // makes sure nothing has run until everything on the page has loaded
-  window.onload = function() {
-    // const button = document.querySelector( 'button' )
-    const button = document.querySelector( 'button' )
-    button.onclick = submit
-  }
-
-  </script>
 </html>
